@@ -54,6 +54,16 @@ jobs:
 
           find bin/packages -type f -name '*alist*' -print
 
+      - name: Upload AList package
+        uses: actions/upload-artifact@v4
+        with:
+          name: alist-package
+          path: |
+            ${{ runner.temp }}/sdk/bin/packages/x86_64/packages/alist-*.apk
+            ${{ runner.temp }}/sdk/bin/packages/x86_64/packages/packages.adb
+            ${{ runner.temp }}/sdk/bin/packages/x86_64/packages/packages.manifest
+          if-no-files-found: error
+
       - name: Upload build log
         if: always()
         uses: actions/upload-artifact@v4
